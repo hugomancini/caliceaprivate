@@ -16,11 +16,13 @@ class PagesController < ApplicationController
     customerId = params["customer_id"]
     customerMail = params["customer_mail"]
     email = params["email"]
+    pro_price = params["pro_price"]
+    total_price = params["total_price"]
     line_items = JSON.parse(params["line_items"])
-    puts line_items
-    puts line_items.class
-    puts line_items[0]["variant_id"].class
-    puts line_items[0]["quantity"].class
+    discount_amount = total_price.to_i - (pro_price.to_i * 100)
+
+    create_discount(discount_amount)
+
     variant_ids = []
     line_items.each do |item|
       variant_id = item["variant_id"].to_i
@@ -40,6 +42,24 @@ class PagesController < ApplicationController
     return @order
   end
 
+  def create_discount(pro_price)
+   @price_rule =  ShopifyAPI::PriceRule.new({
+                 "price_rule": {
+                    "title": "PRO-OFF",
+                    "target_type": "line_item",
+                    "target_selection": "all",
+                    "allocation_method": "across",
+                    "value_type": "fixed_amount",
+                    "value": pro_price,
+                    "customer_selection": "all",
+                    "starts_at": "2017-01-19T17:59:10Z"
+                    }
+                  }
+                )
+   puts @price_rule
+  end
+
+
   def index
     @products = ShopifyAPI::Product.all
   end
@@ -53,3 +73,5 @@ class PagesController < ApplicationController
   end
 
 end
+
+

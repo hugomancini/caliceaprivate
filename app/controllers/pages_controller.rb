@@ -18,14 +18,16 @@ class PagesController < ApplicationController
     email = params["email"]
     pro_price = params["pro_price"]
     total_price = params["total_price"]
-    line_items = JSON.parse(params["line_items"])
-    discount_amount1 = total_price.to_i - (pro_price.to_i * 100)
-    discount_amount = 0 - discount_amount1
+    line_json = params["line_items"]
+    line_items = JSON.parse(line_json)
+    discount_amount = ((total_price.to_i / 100)- (pro_price.to_i)).to_f
 
     create_price_rule(discount_amount)
     create_discount(@price_rule_id)
-    puts @discount_code.id.class
-    puts @discount_code.id
+
+
+    puts discount_amount
+
     variant_ids = []
     line_items.each do |item|
       variant_id = item["variant_id"].to_i
@@ -34,14 +36,20 @@ class PagesController < ApplicationController
       variant_ids << n
     end
 
-    create_order(variant_ids, customerId)
+    create_order(variant_ids, customerId, discount_amount)
 
     render json: {order: @order}
   end
 
-  def create_order(variant_ids, customerId)
-    @order = ShopifyAPI::Order.create(line_items: variant_ids, financial_status:"authorized", customer: { id: customerId })
+  def create_order(variant_ids, customerId, discount_amount)
+    @order = ShopifyAPI::Order.create(line_items: variant_ids, financial_status:"authorized", customer: { id: customerId }, discount_codes:   [{
+    "code": "PRO-OFF",
+    "amount": "#{discount_amount}",
+    "type": "fixed_amount"
+  }])
     @order.save
+    puts @order
+    puts @order.id
     return @order
   end
 
@@ -68,7 +76,7 @@ class PagesController < ApplicationController
     @discount_code.prefix_options[:price_rule_id] = price_rule_id
     @discount_code.code = "PRO-OFF"
     @discount_code.save
-    puts @discount_code.id
+    return @discount_code
   end
 
 

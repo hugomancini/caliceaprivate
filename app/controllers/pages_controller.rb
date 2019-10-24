@@ -22,11 +22,9 @@ class PagesController < ApplicationController
     line_items = JSON.parse(line_json)
     discount_amount = ((total_price.to_i / 100)- (pro_price.to_i)).to_f
 
-    create_price_rule(discount_amount)
-    create_discount(@price_rule_id)
-
-
-    puts discount_amount
+    code_name
+    create_price_rule(discount_amount, @code_name)
+    create_discount(@price_rule_id, @code_name)
 
     variant_ids = []
     line_items.each do |item|
@@ -36,14 +34,14 @@ class PagesController < ApplicationController
       variant_ids << n
     end
 
-    create_order(variant_ids, customerId, discount_amount)
+    create_order(variant_ids, customerId, @code_name, discount_amount)
 
     render json: {order: @order}
   end
 
-  def create_order(variant_ids, customerId, discount_amount)
+  def create_order(variant_ids, customerId, code_name, discount_amount)
     @order = ShopifyAPI::Order.create(line_items: variant_ids, financial_status:"authorized", customer: { id: customerId }, discount_codes:   [{
-    "code": "PRO-OFF",
+    "code": "#{code_name}",
     "amount": "#{discount_amount}",
     "type": "fixed_amount"
   }])
@@ -53,10 +51,10 @@ class PagesController < ApplicationController
     return @order
   end
 
-  def create_price_rule(discount_amount)
+  def create_price_rule(discount_amount, code_name)
    @price_rule =  ShopifyAPI::PriceRule.create({
                  "price_rule": {
-                    "title": "PRO-OFF",
+                    "title": "#{code_name}",
                     "target_type": "line_item",
                     "target_selection": "all",
                     "allocation_method": "across",
@@ -71,12 +69,17 @@ class PagesController < ApplicationController
    return @price_rule_id
   end
 
-  def create_discount(price_rule_id)
+  def create_discount(price_rule_id, code_name)
     @discount_code = ShopifyAPI::DiscountCode.new
     @discount_code.prefix_options[:price_rule_id] = price_rule_id
-    @discount_code.code = "PRO-OFF"
+    @discount_code.code = "#{code_name}"
     @discount_code.save
     return @discount_code
+  end
+
+  def code_name
+    @code_name = (0...8).map { (65 + rand(26)).chr }.join
+    return @code_name
   end
 
 

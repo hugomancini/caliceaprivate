@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :connect_api
 
-  def hello_world
+  def checkout_pro
     customer_id = params['customer_id']
     total_pro = params['total_pro'].to_i
     total_price = (params['total_price'].to_i) / 100
@@ -23,6 +23,7 @@ class PagesController < ApplicationController
       n = { 'quantity' => quantity, 'variant_id' => variant_id }
       variant_ids << n
     end
+    puts @order
 
     create_order(variant_ids, customer_id, @code_name, discount_amount)
 

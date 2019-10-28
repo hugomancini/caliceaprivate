@@ -31,13 +31,15 @@ class PagesController < ApplicationController
   end
 
   def create_order(variant_ids, customer_id, code_name, discount_amount)
-    @order = ShopifyAPI::Order.create(line_items: variant_ids, financial_status:"authorized", customer: { id: customer_id }, discount_codes:   [{
+    @order = ShopifyAPI::Order.new(line_items: variant_ids, financial_status:"authorized", customer: { id: customer_id }, discount_codes:   [{
     'code': "PROPRICE",
     'amount': "#{discount_amount}",
     'type': 'discount_code',
     'value_type': 'fixed_amount',
     'target_selection': 'all',
     'once_per_customer': true }])
+    p @order
+    p @order.save
   end
 
   # CREER UN CODE SUR LE BACKEND SHOPIFY DISPO TOUT LE TEMPS "PRO CODE"

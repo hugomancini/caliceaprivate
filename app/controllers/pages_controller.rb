@@ -16,11 +16,6 @@ class PagesController < ApplicationController
     line_items = JSON.parse(line_json)
     discount_amount = (total_price - total_pro).to_f
     code_name
-
-    puts "total pro : #{total_pro}"
-    puts "total price : #{total_price}"
-    puts "discount : #{discount_amount}"
-
     variant_ids = []
     line_items.each do |item|
       variant_id = item['variant_id'].to_i

@@ -43,11 +43,16 @@ class PagesController < ApplicationController
   end
 
   def delete_all_orders
-    @orders = ShopifyAPI::Order
+    @orders = ShopifyAPI::Order.all
     puts "before -----------------------------------------------------"
-    puts order_size = @orders.size
-
-    render json: {size: order_size}
+    puts @orders.class
+    puts @orders.size
+    @orders.each do |o|
+      puts o.class
+      o.destroy
+    end
+    puts "after---------------------------------"
+    puts @orders.size
   end
   # CREER UN CODE SUR LE BACKEND SHOPIFY DISPO TOUT LE TEMPS "PRO CODE"
   # UTILISER TOUJOURS CE CODE

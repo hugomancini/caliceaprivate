@@ -42,6 +42,11 @@ class PagesController < ApplicationController
     p @order.save
   end
 
+  def delete_all_orders
+    @orders = ShopifyAPI::Order
+    puts "before -----------------------------------------------------"
+    puts @orders
+  end
   # CREER UN CODE SUR LE BACKEND SHOPIFY DISPO TOUT LE TEMPS "PRO CODE"
   # UTILISER TOUJOURS CE CODE
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER

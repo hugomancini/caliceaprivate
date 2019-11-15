@@ -10,11 +10,11 @@ class PagesController < ApplicationController
 
   def checkout_pro
     customer_id = params['customer_id']
-    total_pro = params['total_pro'].to_i
+    pro_price = params['pro_price'].to_i
     total_price = (params['total_price'].to_i) / 100
     line_json = params['line_items']
     line_items = JSON.parse(line_json)
-    discount_amount = (total_price - total_pro).to_f
+    discount_amount = (total_price - pro_price).to_f
     code_name
     variant_ids = []
     line_items.each do |item|
@@ -27,7 +27,7 @@ class PagesController < ApplicationController
 
     puts @order
 
-    render json: { order: @order, total_price: total_price, total_pro: total_pro, dicount: discount_amount}
+    render json: { order: @order, total_price: total_price, pro_price: pro_price, dicount: discount_amount}
   end
 
   def create_order(variant_ids, customer_id, code_name, discount_amount)

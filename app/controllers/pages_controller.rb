@@ -64,6 +64,7 @@ class PagesController < ApplicationController
 
   def index
     @products = ShopifyAPI::Product.all
+    @orders = ShopifyAPI::Order.all
   end
 
   private

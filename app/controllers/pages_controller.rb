@@ -23,9 +23,9 @@ class PagesController < ApplicationController
       n = { 'quantity' => quantity, 'variant_id' => variant_id }
       variant_ids << n
     end
-    puts @order
-
     create_order(variant_ids, customer_id, @code_name, discount_amount)
+
+    puts @order
 
     render json: { order: @order }
   end

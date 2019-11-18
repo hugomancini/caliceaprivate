@@ -26,7 +26,7 @@ class PagesController < ApplicationController
     end
     create_order(variant_ids, customer_id, @code_name, discount_amount, cip)
     puts @order
-    render json: { order: @order, total_price: total_price, pro_price: pro_price, dicount: discount_amount, cip: cip}
+    render json: { order: @order, total_price: total_price, pro_price: pro_price, dicount: discount_amount, cip: cip, status: "order_created"}
   end
 
   def create_order(variant_ids, customer_id, code_name, discount_amount, cip)

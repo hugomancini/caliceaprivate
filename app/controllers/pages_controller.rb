@@ -37,6 +37,8 @@ class PagesController < ApplicationController
     'value_type': 'fixed_amount',
     'target_selection': 'all',
     'once_per_customer': true }])
+    puts "saving ------------------------------------------------------------------------------------------------"
+    @order.save
     p @order
     p @order.save
   end

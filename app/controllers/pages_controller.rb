@@ -38,8 +38,8 @@ class PagesController < ApplicationController
     'value_type': 'fixed_amount',
     'target_selection': 'all',
     'once_per_customer': true }])
-    p @order
     p @order.save
+    p @order.errors.full_messages
   end
 
   def delete_all_orders

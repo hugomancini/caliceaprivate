@@ -12,8 +12,6 @@ class PagesController < ApplicationController
     customer_id = params['customer_id']
     pro_price = params['pro_price'].to_i
     total_price = (params['total_price'].to_i) / 100
-    params = params
-    puts params
     cip = params['cip']
     line_json = params['line_items']
     line_items = JSON.parse(line_json)
@@ -27,7 +25,8 @@ class PagesController < ApplicationController
       variant_ids << n
     end
     create_order(variant_ids, customer_id, @code_name, discount_amount, cip)
-
+    puts "------------------------------------------------------HELLLLLLOOOOOOO"
+    puts cip
     puts @order
 
     render json: { order: @order, total_price: total_price, pro_price: pro_price, dicount: discount_amount, cip: cip}

@@ -33,7 +33,7 @@ class PagesController < ApplicationController
   end
 
   def create_order(variant_ids, customer_id, code_name, discount_amount, cip)
-    @order = ShopifyAPI::Order.new(line_items: variant_ids, tags: [cip], financial_status:"authorized", customer: { id: customer_id }, discount_codes:   [{
+    @order = ShopifyAPI::Order.new(line_items: variant_ids, tags: [cip], attributes: [attr1, cip, attr3], financial_status:"authorized", customer: { id: customer_id }, discount_codes:   [{
     'code': "PROPRICE",
     'amount': "#{discount_amount}",
     'type': 'discount_code',

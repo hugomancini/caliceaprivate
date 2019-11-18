@@ -12,6 +12,8 @@ class PagesController < ApplicationController
     customer_id = params['customer_id']
     pro_price = params['pro_price'].to_i
     total_price = (params['total_price'].to_i) / 100
+    params = params
+    puts params
     cip = params['cip']
     line_json = params['line_items']
     line_items = JSON.parse(line_json)

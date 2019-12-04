@@ -88,25 +88,25 @@ class PagesController < ApplicationController
                    key: "tel",
                    value: customer_tel,
                    value_type: "integer",
-                   namespace: "global"
+                   namespace: "pro"
                  },
                  {
                    key: "siret",
                    value: siret,
                    value_type: "integer",
-                   namespace: "global"
+                   namespace: "pro"
                  },
                  {
                    key: "cip",
                    value: cip,
                    value_type: "integer",
-                   namespace: "global"
+                   namespace: "pro"
                  },
                  {
                    key: "raison_sociale",
                    value: raison_sociale,
                    value_type: "string",
-                   namespace: "global"
+                   namespace: "pro"
                  }
                ]
             )

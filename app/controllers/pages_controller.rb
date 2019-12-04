@@ -62,6 +62,8 @@ class PagesController < ApplicationController
 
   def create_metafields
     @metafields = [ShopifyAPI::Metafield.create({tel: "666"}), ShopifyAPI::Metafield.create({tel: "666"})]
+    puts "puts @metafields in create_metafields---------------------------"
+    puts @metafields
     return @metafields
   end
 
@@ -81,6 +83,8 @@ class PagesController < ApplicationController
     create_metafields
 
     puts "------------------------INSIDE CREATE PRO CUSTOMER"
+    puts "puts @metafields in create_metafields---------------------------"
+
     puts @metafields
 
     customer = ShopifyAPI::Customer.new(email: customer_mail, tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [

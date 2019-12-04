@@ -85,7 +85,8 @@ class PagesController < ApplicationController
     puts @metafields
     puts @metafields.class
 
-    customer = ShopifyAPI::Customer.new(email: customer_mail, metafields: @metafields, tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [
+    customer = ShopifyAPI::Customer.create(email: customer_mail, metafields: @metafields, tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,
+      addresses: [
           {
             "address1": address1,
             "city": city,
@@ -94,7 +95,8 @@ class PagesController < ApplicationController
             "first_name": first_name,
             "country": "FR"
           }]
-            )
+          )
+
     puts "---------------------------------customer"
     puts customer
     customer.save

@@ -68,12 +68,13 @@ class PagesController < ApplicationController
     zip = params["zip"]
     city = params["city"]
     cip = params["cip"]
+    tag = "cip- #{cip}"
     siret = params["siret"]
     raison_sociale = params["raison_sociale"]
 
     puts "------------------------INSIDE CREATE PRO CUSTOMER"
 
-    order = ShopifyAPI::Customer.new(email: customer_mail, phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [
+    customer = ShopifyAPI::Customer.new(email: customer_mail, tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [
           {
             "address1": address1,
             "city": city,
@@ -109,10 +110,10 @@ class PagesController < ApplicationController
                  }
                ]
         ])
-    order.save
-    order.errors.messages
+    customer.save
+    customer.errors.messages
 
-    render json: {answer: order, saved: order.save, error: order.errors.messages }
+    render json: {answer: customer, saved: customer.save, error: customer.errors.messages }
   end
 
   def code_name

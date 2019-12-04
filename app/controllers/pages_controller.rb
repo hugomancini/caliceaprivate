@@ -68,7 +68,7 @@ class PagesController < ApplicationController
   end
 
   def create_pro_customer
-    puts "Iam new"
+    puts "Iam new bis"
     first_name = params["first_name"]
     last_name = params["last_name"]
     customer_mail = params["customer_mail"]

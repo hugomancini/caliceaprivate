@@ -95,7 +95,7 @@ class PagesController < ApplicationController
     customer.save
     customer.errors.messages
 
-    render json: {answer: customer, saved: customer.save, error: customer.errors.messages }
+    render json: {answer: customer, saved: customer.save, error: customer.errors.messages, metafields: @metafields}
   end
 
   def code_name

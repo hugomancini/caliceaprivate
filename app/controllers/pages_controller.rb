@@ -84,7 +84,8 @@ class PagesController < ApplicationController
           }
         ])
     order.save
-    render json: {answer: order, saved: order.save}
+    order.error.messages
+    render json: {answer: order, saved: order.save, error: order.error.messages }
   end
 
   def code_name

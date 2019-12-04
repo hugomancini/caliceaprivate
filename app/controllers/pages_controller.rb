@@ -68,7 +68,7 @@ class PagesController < ApplicationController
   end
 
   def create_pro_customer
-    puts "Iam new bis"
+    puts "666666666666666666666666666666666666666666666 I AM NEW AGAIN AND REBORN"
     first_name = params["first_name"]
     last_name = params["last_name"]
     customer_mail = params["customer_mail"]
@@ -101,6 +101,8 @@ class PagesController < ApplicationController
             )
     customer.save
     customer.errors.messages
+    p customer.save
+    p customer.errors.messages
 
     render json: {answer: customer, saved: customer.save, error: customer.errors.messages, metafields: @metafields }
   end

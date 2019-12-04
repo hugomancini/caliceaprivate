@@ -61,13 +61,14 @@ class PagesController < ApplicationController
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER
 
   def create_metafields
-    @metafields = [ShopifyAPI::Metafield.create({tel: "666"}), ShopifyAPI::Metafield.create({cip: "666"})]
+    @metafields = [ShopifyAPI::Metafield.create({tel: "666"}), ShopifyAPI::Metafield.create({tel: "666"})]
     puts "puts @metafields in create_metafields---------------------------"
     puts @metafields
+    return @metafields
   end
 
-
   def create_pro_customer
+    puts "Iam new bis"
     first_name = params["first_name"]
     last_name = params["last_name"]
     customer_mail = params["customer_mail"]
@@ -79,14 +80,15 @@ class PagesController < ApplicationController
     tag = "cip- #{cip}"
     siret = params["siret"]
     raison_sociale = params["raison_sociale"]
+
     create_metafields
 
-    puts "------------------------INSIDE CREATE PRO CUSTOMER @metafields"
-    puts @metafields
-    puts @metafields.class
+    puts "------------------------INSIDE CREATE PRO CUSTOMER"
+    puts "puts @metafields in create_metafields---------------------------"
 
-    customer = ShopifyAPI::Customer.create(email: customer_mail, metafields: @metafields, tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,
-      addresses: [
+    puts @metafields
+
+    customer = ShopifyAPI::Customer.new(email: customer_mail,send_email_invite: true,tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [
           {
             "address1": address1,
             "city": city,
@@ -94,15 +96,13 @@ class PagesController < ApplicationController
             "last_name": last_name,
             "first_name": first_name,
             "country": "FR"
-          }]
-          )
-
-    puts "---------------------------------customer"
-    puts customer
+          }],
+          metafields: @metafields
+            )
     customer.save
     customer.errors.messages
 
-    render json: {answer: customer, saved: customer.save, error: customer.errors.messages }
+    render json: {answer: customer, saved: customer.save, error: customer.errors.messages, metafields: @metafields }
   end
 
   def code_name

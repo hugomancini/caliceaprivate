@@ -61,13 +61,7 @@ class PagesController < ApplicationController
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER
 
   def create_metafields
-    @metafields = ShopifyAPI::Metafield.create(metafields:
-                 {
-                   key: "birthday",
-                   value: birthday,
-                   value_type: "string",
-                   namespace: "global"
-                 }]
+    @metafields = [ShopifyAPI::Metafield.create({tel: "666"}), ShopifyAPI::Metafield.create({tel: "666"})]
     puts "puts @metafields in create_metafields---------------------------"
     puts @metafields
     return @metafields

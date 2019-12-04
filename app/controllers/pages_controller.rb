@@ -79,6 +79,7 @@ class PagesController < ApplicationController
     tag = "cip- #{cip}"
     siret = params["siret"]
     raison_sociale = params["raison_sociale"]
+    create_metafields
 
     puts "------------------------INSIDE CREATE PRO CUSTOMER @metafields"
     puts @metafields

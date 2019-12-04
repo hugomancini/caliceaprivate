@@ -73,7 +73,7 @@ class PagesController < ApplicationController
 
     puts "------------------------INSIDE CREATE PRO CUSTOMER"
 
-    order = ShopifyAPI::Customer.new(email: customer_mail, first_name: first_name, last_name: last_name,  addresses: [
+    order = ShopifyAPI::Customer.new(email: customer_mail, phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [
           {
             "address1": address1,
             "city": city,
@@ -81,7 +81,33 @@ class PagesController < ApplicationController
             "last_name": last_name,
             "first_name": first_name,
             "country": "FR"
-          }
+          },
+          metafields: [
+                 {
+                   key: "tel",
+                   value: customer_tel,
+                   value_type: "integer",
+                   namespace: "global"
+                 },
+                 {
+                   key: "siret",
+                   value: siret,
+                   value_type: "integer",
+                   namespace: "global"
+                 },
+                 {
+                   key: "cip",
+                   value: cip,
+                   value_type: "integer",
+                   namespace: "global"
+                 },
+                 {
+                   key: "raison_sociale",
+                   value: raison_sociale,
+                   value_type: "string",
+                   namespace: "global"
+                 }
+               ]
         ])
     order.save
     order.errors.messages

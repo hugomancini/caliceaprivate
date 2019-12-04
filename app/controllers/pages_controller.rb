@@ -88,7 +88,7 @@ class PagesController < ApplicationController
 
     puts @metafields
 
-    customer = ShopifyAPI::Customer.new(email: customer_mail,send_email_invite: true,tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [
+    customer = ShopifyAPI::Customer.new(metafields: @metafields, email: customer_mail,send_email_invite: true,tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [
           {
             "address1": address1,
             "city": city,

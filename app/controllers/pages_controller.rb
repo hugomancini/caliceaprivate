@@ -60,18 +60,29 @@ class PagesController < ApplicationController
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER
 
   def create_pro_customer
+    first_name = params["first_name"]
+    last_name = params["last_name"]
+    customer_mail = params["customer_mail"]
+    customer_tel = params["customer_tel"]
+    address1 = params["address1"]
+    zip = params["zip"]
+    city = params["city"]
+    cip = params["cip"]
+    siret = params["siret"]
+    raison_sociale = params["raison_sociale"]
+
     puts "------------------------INSIDE CREATE PRO CUSTOMER"
-    # { ShopifyAPIRetry.retry { ShopifyAPI::Customer.create(email: Faker::Internet.unique.email, first_name: Faker::Name.unique.first_name, last_name: Faker::Name.unique.last_name,  addresses: [
-    #       {
-    #         "address1": Faker::Address.street_address,
-    #         "city": Faker::Address.city,
-    #         "zip": Faker::Address.zip_code,
-    #         "last_name": Faker::Name.unique.last_name,
-    #         "first_name": Faker::Name.unique.first_name,
-    #         "country": Faker::Address.country_code
-    #       }
-        # ]) } }
-    render json: {answer: "hey yop I am here"}
+    { ShopifyAPIRetry.retry { order = ShopifyAPI::Customer.create(email: customer_mail, first_name: first_name, last_name: last_name,  addresses: [
+          {
+            "address1": address1,
+            "city": city,
+            "zip": zip,
+            "last_name": last_name,
+            "first_name": first_name,
+            "country": "FR"
+          }
+        ]) } }
+    render json: {answer: order}
   end
 
   def code_name

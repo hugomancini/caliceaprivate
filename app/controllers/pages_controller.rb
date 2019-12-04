@@ -26,13 +26,13 @@ class PagesController < ApplicationController
       n = { 'quantity' => quantity, 'variant_id' => variant_id }
       variant_ids << n
     end
-    create_order(variant_ids, customer_id, @code_name, discount_amount, tag, cip, customer_mail)
+    create_order(variant_ids, customer_id, @code_name, discount_amount, tag, cip, customer_mail, note)
     puts @order
     render json: { order: @order, total_price: total_price, pro_price: pro_price, dicount: discount_amount, cip: cip, status: "order_created"}
   end
 
-  def create_order(variant_ids, customer_id, code_name, discount_amount, tag, cip, customer_mail)
-    @order = ShopifyAPI::Order.new(line_items: variant_ids, tags: tag, attributes: ["CIP", cip], financial_status:"authorized", customer: { id: customer_id, email: customer_mail }, discount_codes:   [{
+  def create_order(variant_ids, customer_id, code_name, discount_amount, tag, cip, customer_mail, note)
+    @order = ShopifyAPI::Order.new(line_items: variant_ids, tags: tag, attributes: ["CIP", cip], financial_status:"authorized", note: note, customer: { id: customer_id, email: customer_mail }, discount_codes:   [{
     'code': "PROPRICE",
     'amount': "#{discount_amount}",
     'type': 'discount_code',

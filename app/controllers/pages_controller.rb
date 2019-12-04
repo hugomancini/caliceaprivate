@@ -60,13 +60,6 @@ class PagesController < ApplicationController
   # UTILISER TOUJOURS CE CODE
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER
 
-  def create_metafields
-    @metafields = [ShopifyAPI::Metafield.create({tel: "666"}), ShopifyAPI::Metafield.create({tel: "666"})]
-    puts "puts @metafields in create_metafields---------------------------"
-    puts @metafields
-    return @metafields
-  end
-
   def create_pro_customer
     first_name = params["first_name"]
     last_name = params["last_name"]
@@ -80,12 +73,7 @@ class PagesController < ApplicationController
     siret = params["siret"]
     raison_sociale = params["raison_sociale"]
 
-    create_metafields
-
     puts "------------------------INSIDE CREATE PRO CUSTOMER"
-    puts "puts @metafields in IN PEOCUSROLMES---------------------------"
-
-    puts @metafields
 
     customer = ShopifyAPI::Customer.new(email: customer_mail, tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [
           {
@@ -96,12 +84,19 @@ class PagesController < ApplicationController
             "first_name": first_name,
             "country": "FR"
           }],
-          metafields: @metafields
+          metafields: [
+                 {
+                   key: "tel",
+                   value: customer_tel,
+                   value_type: "integer",
+                   namespace: "pro"
+                 }
+               ]
             )
     customer.save
     customer.errors.messages
 
-    render json: {answer: customer, saved: customer.save, error: customer.errors.messages, metafields: @metafields }
+    render json: {answer: customer, saved: customer.save, error: customer.errors.messages }
   end
 
   def code_name

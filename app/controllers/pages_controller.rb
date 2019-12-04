@@ -14,6 +14,7 @@ class PagesController < ApplicationController
     total_price = (params['total_price'].to_i) / 100
     customer_mail = params['customer_mail']
     cip = params['cip'].to_i
+    tag = "cip- #{cip}"
     line_json = params['line_items']
     line_items = JSON.parse(line_json)
     discount_amount = (total_price - pro_price).to_f
@@ -31,7 +32,7 @@ class PagesController < ApplicationController
   end
 
   def create_order(variant_ids, customer_id, code_name, discount_amount, cip, customer_mail)
-    @order = ShopifyAPI::Order.new(line_items: variant_ids, tags: [cip], attributes: ["CIP", cip], financial_status:"authorized", customer: { id: customer_id, email: customer_mail }, discount_codes:   [{
+    @order = ShopifyAPI::Order.new(line_items: variant_ids, tags: tag, attributes: ["CIP", cip], financial_status:"authorized", customer: { id: customer_id, email: customer_mail }, discount_codes:   [{
     'code': "PROPRICE",
     'amount': "#{discount_amount}",
     'type': 'discount_code',

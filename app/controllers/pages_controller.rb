@@ -82,7 +82,7 @@ class PagesController < ApplicationController
             "first_name": first_name,
             "country": "FR"
           }
-        ]) }
+        ])
     order.save
     render json: {answer: order, saved: order.save}
   end

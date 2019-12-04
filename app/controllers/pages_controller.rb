@@ -82,7 +82,7 @@ class PagesController < ApplicationController
             "last_name": last_name,
             "first_name": first_name,
             "country": "FR"
-          },
+          }],
           metafields: [
                  {
                    key: "tel",
@@ -109,7 +109,7 @@ class PagesController < ApplicationController
                    namespace: "global"
                  }
                ]
-        ])
+            )
     customer.save
     customer.errors.messages
 

@@ -60,23 +60,8 @@ class PagesController < ApplicationController
   # UTILISER TOUJOURS CE CODE
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER
 
-  def create_metafields(cip, siret, raison_sociale)
-    @metafields = [ShopifyAPI::Metafield.create(   {
-                   key: "cip",
-                   value: cip,
-                   value_type: "integer",
-                   namespace: "global"
-                 }), ShopifyAPI::Metafield.create({
-                   key: "siret",
-                   value: siret,
-                   value_type: "integer",
-                   namespace: "global"
-                 }), ShopifyAPI::Metafield.create({
-                   key: "raison_sociale",
-                   value: raison_sociale,
-                   value_type: "integer",
-                   namespace: "global"
-                 })]
+  def create_metafields
+    @metafields = [ShopifyAPI::Metafield.create({tel: "666"}), ShopifyAPI::Metafield.create({tel: "666"})]
     puts "puts @metafields in create_metafields---------------------------"
     puts @metafields
     return @metafields

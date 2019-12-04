@@ -64,10 +64,10 @@ class PagesController < ApplicationController
     @metafields = [ShopifyAPI::Metafield.create({tel: "666"}), ShopifyAPI::Metafield.create({tel: "666"})]
     puts "puts @metafields in create_metafields---------------------------"
     puts @metafields
+    return @metafields
   end
 
   def create_pro_customer
-    puts "555555555555 I AM NEW AGAIN AND REBORN"
     first_name = params["first_name"]
     last_name = params["last_name"]
     customer_mail = params["customer_mail"]
@@ -83,11 +83,11 @@ class PagesController < ApplicationController
     create_metafields
 
     puts "------------------------INSIDE CREATE PRO CUSTOMER"
-    puts "puts @metafields in CREATEPRO---------------------------"
+    puts "puts @metafields in IN PEOCUSROLMES---------------------------"
 
     puts @metafields
 
-    customer = ShopifyAPI::Customer.create(email: customer_mail,send_email_invite: true,tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [
+    customer = ShopifyAPI::Customer.new(email: customer_mail, tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [
           {
             "address1": address1,
             "city": city,
@@ -98,10 +98,8 @@ class PagesController < ApplicationController
           }],
           metafields: @metafields
             )
-    puts "--------------------------------CUSTOMER"
-
-    puts customer
-    puts customer.class
+    customer.save
+    customer.errors.messages
 
     render json: {answer: customer, saved: customer.save, error: customer.errors.messages, metafields: @metafields }
   end

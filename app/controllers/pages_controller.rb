@@ -72,16 +72,17 @@ class PagesController < ApplicationController
     raison_sociale = params["raison_sociale"]
 
     puts "------------------------INSIDE CREATE PRO CUSTOMER"
-    { ShopifyAPIRetry.retry { order = ShopifyAPI::Customer.create(email: customer_mail, first_name: first_name, last_name: last_name,  addresses: [
-          {
-            "address1": address1,
-            "city": city,
-            "zip": zip,
-            "last_name": last_name,
-            "first_name": first_name,
-            "country": "FR"
-          }
-        ]) } }
+
+    # { ShopifyAPIRetry.retry { order = ShopifyAPI::Customer.create(email: customer_mail, first_name: first_name, last_name: last_name,  addresses: [
+    #       {
+    #         "address1": address1,
+    #         "city": city,
+    #         "zip": zip,
+    #         "last_name": last_name,
+    #         "first_name": first_name,
+    #         "country": "FR"
+    #       }
+    #     ]) } }
     render json: {answer: "heyyy yoooo"}
   end
 

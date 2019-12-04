@@ -81,7 +81,7 @@ class PagesController < ApplicationController
     siret = params["siret"]
     raison_sociale = params["raison_sociale"]
 
-    create_metafields(cip, siret, raison_sociale)
+    create_metafields
 
     puts "------------------------INSIDE CREATE PRO CUSTOMER"
     puts "puts @metafields in create_metafields---------------------------"

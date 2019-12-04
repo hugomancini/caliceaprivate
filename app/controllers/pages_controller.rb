@@ -59,6 +59,21 @@ class PagesController < ApplicationController
   # UTILISER TOUJOURS CE CODE
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER
 
+  def create_pro_customer
+    puts "------------------------INSIDE CREATE PRO CUSTOMER"
+    { ShopifyAPIRetry.retry { ShopifyAPI::Customer.create(email: Faker::Internet.unique.email, first_name: Faker::Name.unique.first_name, last_name: Faker::Name.unique.last_name,  addresses: [
+          {
+            "address1": Faker::Address.street_address,
+            "city": Faker::Address.city,
+            "zip": Faker::Address.zip_code,
+            "last_name": Faker::Name.unique.last_name,
+            "first_name": Faker::Name.unique.first_name,
+            "country": Faker::Address.country_code
+          }
+        ]) } }
+    render json: {answer: "hey yop I am here"}
+  end
+
   def code_name
     @code_name = (0...8).map { (65 + rand(26)).chr }.join
   end

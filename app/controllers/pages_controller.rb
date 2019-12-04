@@ -9,6 +9,7 @@ class PagesController < ApplicationController
   before_action :connect_api
 
   def checkout_pro
+
     customer_id = params['customer_id']
     note = params['note']
     pro_price = params['pro_price'].to_i

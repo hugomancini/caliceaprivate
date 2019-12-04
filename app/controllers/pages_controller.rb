@@ -96,8 +96,7 @@ class PagesController < ApplicationController
             "last_name": last_name,
             "first_name": first_name,
             "country": "FR"
-          }],
-          metafields: @metafields
+          }]
             )
     customer.save
     customer.errors.messages

@@ -10,6 +10,7 @@ class PagesController < ApplicationController
 
   def checkout_pro
     customer_id = params['customer_id']
+    note = params['note']
     pro_price = params['pro_price'].to_i
     total_price = (params['total_price'].to_i) / 100
     customer_mail = params['customer_mail']
@@ -28,7 +29,7 @@ class PagesController < ApplicationController
     end
     create_order(variant_ids, customer_id, @code_name, discount_amount, tag, cip, customer_mail, note)
     puts @order
-    render json: { order: @order, total_price: total_price, pro_price: pro_price, dicount: discount_amount, cip: cip, status: "order_created"}
+    render json: { order: @order, total_price: total_price, pro_price: pro_price, dicount: discount_amount, cip: cip, status: "order_created", errors: @order.errors.messages }
   end
 
   def create_order(variant_ids, customer_id, code_name, discount_amount, tag, cip, customer_mail, note)

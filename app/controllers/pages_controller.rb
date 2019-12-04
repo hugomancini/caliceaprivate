@@ -68,7 +68,7 @@ class PagesController < ApplicationController
   end
 
   def create_pro_customer
-    puts "666666666666666666666666666666666666666666666 I AM NEW AGAIN AND REBORN"
+    puts "555555555555 I AM NEW AGAIN AND REBORN"
     first_name = params["first_name"]
     last_name = params["last_name"]
     customer_mail = params["customer_mail"]

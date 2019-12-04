@@ -82,7 +82,7 @@ class PagesController < ApplicationController
             "country": "FR"
           }
         ]) } }
-    render json: {answer: order}
+    render json: {answer: "heyyy yoooo"}
   end
 
   def code_name

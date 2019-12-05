@@ -90,6 +90,7 @@ class PagesController < ApplicationController
                 last_name: last_name,
                 phone: customer_tel,
                 tags: tag,
+                note: "Rempli via formulaire PRO",
                 addresses: [
                     {
                       first_name: first_name,
@@ -128,6 +129,7 @@ class PagesController < ApplicationController
               }
     cus = ShopifyAPI::Customer.new(customer)
     p cus
+    puts "CUS.SAVE ................................................"
     p cus.save
     p cus.errors
 

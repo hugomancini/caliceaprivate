@@ -105,7 +105,14 @@ class PagesController < ApplicationController
                     }
                 ],
                 send_email_invite: false,
-                metafields: @metafield1
+                metafields: [
+                               {
+                                 key: "birthday",
+                                 value: "19/04/1983",
+                                 value_type: "string",
+                                 namespace: "global"
+                               }
+                             ]
               }
     cus = ShopifyAPI::Customer.create(customer)
     p cus

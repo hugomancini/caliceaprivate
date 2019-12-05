@@ -105,7 +105,7 @@ class PagesController < ApplicationController
                       default: true
                     }
                 ],
-                send_email_invite: false,
+                send_email_invite: true,
                 metafields: [
                                {
                                  key: "siret",

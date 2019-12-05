@@ -61,6 +61,7 @@ class PagesController < ApplicationController
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER
 
   def create_pro_customer
+    puts "inside thomas createPro"
     shop = Shop.last
     p shop.connect_to_store
     customer = {

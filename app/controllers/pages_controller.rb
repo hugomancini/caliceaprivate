@@ -108,8 +108,8 @@ class PagesController < ApplicationController
                 metafields: [
                                {
                                  key: "birthday",
-                                 value: "19/04/1983",
-                                 value_type: "string",
+                                 value: "#{siret}",
+                                 value_type: "integer",
                                  namespace: "global"
                                }
                              ]

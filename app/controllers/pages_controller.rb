@@ -60,6 +60,52 @@ class PagesController < ApplicationController
   # UTILISER TOUJOURS CE CODE
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER
 
+  def create_pro_customer
+    shop = Shop.last
+    p shop.connect_to_store
+    customer = {
+                email: "throndio2@gmail.com",
+                accepts_marketing: true,
+                first_name: 'Thomas',
+                last_name: 'Rondio',
+                note: 'hoho',
+                phone: '0649840679',
+                tags: "Ziqy, Customer, CIP",
+                addresses: [
+                    {
+                      first_name: "Thomas",
+                      last_name: "last_name",
+                      company: "company",
+                      address1: "address1",
+                      address2: "address2",
+                      city: "city",
+                      country: "France",
+                      zip: "57903",
+                      phone: "0649840679",
+                      name: "a_name",
+                      country_code: "FR",
+                      default: true
+                    }
+                ],
+                marketing_opt_in_level: true,
+                send_email_invite: false,
+                metafields: [
+                     {
+                       key: "birthday",
+                       value: "19/04/1983",
+                       value_type: "string",
+                       namespace: "global"
+                     }
+                   ]
+              }
+    cus = ShopifyAPI::Customer.new(customer)
+    p cus.valid?
+    p cus.save
+    p cus.errors
+    p ShopifyAPI::Customer.find(cus.id).metafields
+
+  end
+
   def create_metafields
     @metafields = [ShopifyAPI::Metafield.create({tel: "666"}), ShopifyAPI::Metafield.create({tel: "666"})]
     puts "puts @metafields in create_metafields---------------------------"
@@ -67,7 +113,7 @@ class PagesController < ApplicationController
     return @metafields
   end
 
-  def create_pro_customer
+  def create_pro_customerSTOP
     puts "Iam new bis"
     first_name = params["first_name"]
     last_name = params["last_name"]

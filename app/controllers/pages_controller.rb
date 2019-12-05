@@ -72,7 +72,7 @@ class PagesController < ApplicationController
     address1 = params["address1"]
     zip = params["zip"]
     city = params["city"]
-    cip = params["cip"]
+    @cip = params["cip"]
     tag = "cip- #{cip}"
     siret = params["siret"]
     raison_sociale = params["raison_sociale"]
@@ -80,6 +80,8 @@ class PagesController < ApplicationController
     puts "metafields -----------------------"
     puts metafield1
     puts metafield2
+    puts @cip
+    puts tag
 
     customer = {
                 email: customer_mail,
@@ -106,7 +108,7 @@ class PagesController < ApplicationController
                 metafields: [
                      {
                        key: "cip",
-                       value: cip,
+                       value: @cip,
                        value_type: "string",
                        namespace: "v2.0"
                      }

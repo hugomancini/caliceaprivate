@@ -114,8 +114,11 @@ class PagesController < ApplicationController
                                }
                              ]
               }
-    cus = ShopifyAPI::Customer.create(customer)
+    cus = ShopifyAPI::Customer.new(customer)
     p cus
+    p cus.save
+    p cus.errors
+
     p cus.id
     p meta = ShopifyAPI::Customer.find(cus.id).metafields
     render json: {answer: cus, error: cus.errors.messages, metafields: meta }

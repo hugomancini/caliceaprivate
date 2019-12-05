@@ -62,37 +62,45 @@ class PagesController < ApplicationController
 
   def create_pro_customer
     puts "inside thomas createPro"
+    puts "Iam new bis"
+    first_name = params["first_name"]
+    last_name = params["last_name"]
+    customer_mail = params["customer_mail"]
+    customer_tel = params["customer_tel"]
+    address1 = params["address1"]
+    zip = params["zip"]
+    city = params["city"]
+    cip = params["cip"]
+    tag = "cip- #{cip}"
+    siret = params["siret"]
+    raison_sociale = params["raison_sociale"]
 
     customer = {
-                email: "throndio2@gmail.com",
+                email: customer_mail,
                 accepts_marketing: true,
-                first_name: 'Thomas',
-                last_name: 'Rondio',
-                note: 'hoho',
-                phone: '0649840679',
-                tags: "Ziqy, Customer, CIP",
+                first_name: first_name,
+                last_name: last_name,
+                phone: customer_tel,
+                tags: tag,
                 addresses: [
                     {
-                      first_name: "Thomas",
-                      last_name: "last_name",
-                      company: "company",
-                      address1: "address1",
-                      address2: "address2",
-                      city: "city",
-                      country: "France",
-                      zip: "57903",
-                      phone: "0649840679",
-                      name: "a_name",
+                      first_name: first_name,
+                      last_name: last_name,
+                      company: raison_sociale,
+                      address1: address1,
+                      city: city,
+                      country: "FR",
+                      zip: zip,
+                      phone: customer_telt,
                       country_code: "FR",
                       default: true
                     }
                 ],
-                marketing_opt_in_level: true,
                 send_email_invite: false,
                 metafields: [
                      {
-                       key: "birthday",
-                       value: "19/04/1983",
+                       key: "cip",
+                       value: cip,
                        value_type: "string",
                        namespace: "global"
                      }
@@ -102,7 +110,9 @@ class PagesController < ApplicationController
     p cus.valid?
     p cus.save
     p cus.errors
-    p ShopifyAPI::Customer.find(cus.id).metafields
+    p meta = ShopifyAPI::Customer.find(cus.id).metafields
+    render json: {answer: cus, saved: cus.save, error: cus.errors.messages, metafields: meta }
+
 
   end
 

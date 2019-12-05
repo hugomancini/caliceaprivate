@@ -94,6 +94,12 @@ class PagesController < ApplicationController
                        value: "19/04/1983",
                        value_type: "string",
                        namespace: "global"
+                     },
+                     {
+                       key: "birthday",
+                       value: "19/04/1983",
+                       value_type: "string",
+                       namespace: "global"
                      }
                    ]
               }
@@ -102,6 +108,8 @@ class PagesController < ApplicationController
     p cus.save
     p cus.errors
     p ShopifyAPI::Customer.find(cus.id).metafields
+
+    render: json {answer: cus }
 
   end
 
@@ -126,14 +134,44 @@ class PagesController < ApplicationController
     siret = params["siret"]
     raison_sociale = params["raison_sociale"]
 
-    create_metafields
 
     puts "------------------------INSIDE CREATE PRO CUSTOMER"
-    puts "puts @metafields in create_metafields---------------------------"
 
-    puts @metafields
+    customer = {
+                email: customer_mail,
+                accepts_marketing: true,
+                first_name: first_name,
+                last_name: last_name,
+                phone: customer_tel,
+                tags: tags: tag,
+                addresses: [
+                    {
+                      first_name: first_name,
+                      last_name: last_name,
+                      company: raison_sociale
+                      address1: address1,
+                      address2: "address2",
+                      city: city,
+                      country: "FR",
+                      zip: zip,
+                      phone: customer_tel,
+                      country_code: "FR",
+                      default: true
+                    }
+                ],
+                marketing_opt_in_level: true,
+                send_email_invite: false,
+                metafields: [
+                     {
+                       key: "cip",
+                       value: cip
+                       value_type: "integer",
+                       namespace: "global"
+                     }
+                   ]
+              }
 
-    customer = ShopifyAPI::Customer.new(metafields: @metafields, email: customer_mail,send_email_invite: true,tags: tag ,phone: customer_tel, first_name: first_name, last_name: last_name,  addresses: [
+    customer = ShopifyAPI::Customer.new(metafields: @metafields, true,tags: tag ,phone: , first_name: first_name, last_name: last_name,  addresses: [
           {
             "address1": address1,
             "city": city,

@@ -121,7 +121,7 @@ class PagesController < ApplicationController
                                {
                                  key: "raison_sociale",
                                  value: "#{raison_sociale}",
-                                 value_type: "integer",
+                                 value_type: "string",
                                  namespace: "global"
                                }
                              ]

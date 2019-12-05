@@ -120,72 +120,72 @@ class PagesController < ApplicationController
     return @metafields
   end
 
-  def create_pro_customerSTOP
-    puts "Iam new bis"
-    first_name = params["first_name"]
-    last_name = params["last_name"]
-    customer_mail = params["customer_mail"]
-    customer_tel = params["customer_tel"]
-    address1 = params["address1"]
-    zip = params["zip"]
-    city = params["city"]
-    cip = params["cip"]
-    tag = "cip- #{cip}"
-    siret = params["siret"]
-    raison_sociale = params["raison_sociale"]
+  # def create_pro_customerSTOP
+  #   puts "Iam new bis"
+  #   first_name = params["first_name"]
+  #   last_name = params["last_name"]
+  #   customer_mail = params["customer_mail"]
+  #   customer_tel = params["customer_tel"]
+  #   address1 = params["address1"]
+  #   zip = params["zip"]
+  #   city = params["city"]
+  #   cip = params["cip"]
+  #   tag = "cip- #{cip}"
+  #   siret = params["siret"]
+  #   raison_sociale = params["raison_sociale"]
 
 
-    puts "------------------------INSIDE CREATE PRO CUSTOMER"
+  #   puts "------------------------INSIDE CREATE PRO CUSTOMER"
 
-    customer = {
-                email: customer_mail,
-                accepts_marketing: true,
-                first_name: first_name,
-                last_name: last_name,
-                phone: customer_tel,
-                tags: tags: tag,
-                addresses: [
-                    {
-                      first_name: first_name,
-                      last_name: last_name,
-                      company: raison_sociale
-                      address1: address1,
-                      address2: "address2",
-                      city: city,
-                      country: "FR",
-                      zip: zip,
-                      phone: customer_tel,
-                      country_code: "FR",
-                      default: true
-                    }
-                ],
-                marketing_opt_in_level: true,
-                send_email_invite: false,
-                metafields: [
-                     {
-                       key: "cip",
-                       value: cip
-                       value_type: "integer",
-                       namespace: "global"
-                     }
-                   ]
-              }
+  #   customer = {
+  #               email: customer_mail,
+  #               accepts_marketing: true,
+  #               first_name: first_name,
+  #               last_name: last_name,
+  #               phone: customer_tel,
+  #               tags: tags: tag,
+  #               addresses: [
+  #                   {
+  #                     first_name: first_name,
+  #                     last_name: last_name,
+  #                     company: raison_sociale
+  #                     address1: address1,
+  #                     address2: "address2",
+  #                     city: city,
+  #                     country: "FR",
+  #                     zip: zip,
+  #                     phone: customer_tel,
+  #                     country_code: "FR",
+  #                     default: true
+  #                   }
+  #               ],
+  #               marketing_opt_in_level: true,
+  #               send_email_invite: false,
+  #               metafields: [
+  #                    {
+  #                      key: "cip",
+  #                      value: cip,
+  #                      value_type: "integer",
+  #                      namespace: "global"
+  #                    }
+  #                  ]
+  #             }
 
-    customer = ShopifyAPI::Customer.new(metafields: @metafields, true,tags: tag ,phone: , first_name: first_name, last_name: last_name,  addresses: [
-          {
-            "address1": address1,
-            "city": city,
-            "zip": zip,
-            "last_name": last_name,
-            "first_name": first_name,
-            "country": "FR"
-          }]
-            )
-    customer.save
-    customer.errors.messages
+  #   customer = ShopifyAPI::Customer.new(metafields: @metafields, true,tags: tag ,phone: , first_name: first_name, last_name: last_name,  addresses: [
+  #         {
+  #           "address1": address1,
+  #           "city": city,
+  #           "zip": zip,
+  #           "last_name": last_name,
+  #           "first_name": first_name,
+  #           "country": "FR"
+  #         }]
+  #           )
+  #   customer.save
+  #   customer.errors.messages
 
-    render json: {answer: customer, saved: customer.save, error: customer.errors.messages, metafields: @metafields }
-  end
+  #   render json: {answer: customer, saved: customer.save, error: customer.errors.messages, metafields: @metafields }
+  # end
 
   def code_name
     @code_name = (0...8).map { (65 + rand(26)).chr }.join

@@ -91,7 +91,7 @@ class PagesController < ApplicationController
                       city: city,
                       country: "FR",
                       zip: zip,
-                      phone: customer_telt,
+                      phone: customer_tel,
                       country_code: "FR",
                       default: true
                     }

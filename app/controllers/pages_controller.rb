@@ -102,7 +102,7 @@ class PagesController < ApplicationController
                        key: "cip",
                        value: cip,
                        value_type: "string",
-                       namespace: "global"
+                       namespace: "v2"
                      }
                    ]
               }

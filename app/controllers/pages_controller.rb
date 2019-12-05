@@ -109,6 +109,7 @@ class PagesController < ApplicationController
               }
     cus = ShopifyAPI::Customer.new(customer)
     p cus.valid?
+    p cus
     p cus.save
     p cus.errors
     p meta = ShopifyAPI::Customer.find(cus.id).metafields

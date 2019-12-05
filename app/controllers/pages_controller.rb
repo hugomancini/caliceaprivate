@@ -63,6 +63,8 @@ class PagesController < ApplicationController
   def create_pro_customer
     puts "inside thomas createPro"
     puts "Iam new bis"
+    @metafield1 = ShopifyAPI::Metafield.create({cip: cip})
+    @metafield2 = ShopifyAPI::Metafield.create({siret: siret})
     first_name = params["first_name"]
     last_name = params["last_name"]
     customer_mail = params["customer_mail"]
@@ -74,6 +76,10 @@ class PagesController < ApplicationController
     tag = "cip- #{cip}"
     siret = params["siret"]
     raison_sociale = params["raison_sociale"]
+
+    puts "metafields -----------------------"
+    puts metafield1
+    puts metafield2
 
     customer = {
                 email: customer_mail,
@@ -102,7 +108,7 @@ class PagesController < ApplicationController
                        key: "cip",
                        value: cip,
                        value_type: "string",
-                       namespace: "v2"
+                       namespace: "v2.0"
                      }
                    ]
               }
@@ -117,7 +123,8 @@ class PagesController < ApplicationController
   end
 
   def create_metafields
-    @metafields = [ShopifyAPI::Metafield.create({tel: "666"}), ShopifyAPI::Metafield.create({tel: "666"})]
+    @metafield1 = ShopifyAPI::Metafield.create({cip: cip})
+    @metafield2 = ShopifyAPI::Metafield.create({siret: siret})
     puts "puts @metafields in create_metafields---------------------------"
     puts @metafields
     return @metafields

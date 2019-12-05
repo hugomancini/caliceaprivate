@@ -62,8 +62,6 @@ class PagesController < ApplicationController
 
   def create_pro_customer
     puts "inside thomas createPro"
-    shop = Shop.last
-    p shop.connect_to_store
     customer = {
                 email: "throndio2@gmail.com",
                 accepts_marketing: true,

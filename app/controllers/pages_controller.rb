@@ -107,8 +107,20 @@ class PagesController < ApplicationController
                 send_email_invite: false,
                 metafields: [
                                {
-                                 key: "birthday",
+                                 key: "siret",
                                  value: "#{siret}",
+                                 value_type: "integer",
+                                 namespace: "global"
+                               },
+                               {
+                                 key: "cip",
+                                 value: "#{cip}",
+                                 value_type: "integer",
+                                 namespace: "global"
+                               },
+                               {
+                                 key: "raison_sociale",
+                                 value: "#{raison_sociale}",
                                  value_type: "integer",
                                  namespace: "global"
                                }

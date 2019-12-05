@@ -78,9 +78,9 @@ class PagesController < ApplicationController
     puts "metafields -----------------------"
     @metafield1 = ShopifyAPI::Metafield.create({cip: cip})
     @metafield2 = ShopifyAPI::Metafield.create({siret: siret})
-    puts metafield1
-    puts metafield2
-    puts cip
+    puts @metafield1
+    puts @metafield2
+    puts @cip
     puts tag
 
     customer = {

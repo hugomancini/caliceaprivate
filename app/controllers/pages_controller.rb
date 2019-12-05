@@ -107,13 +107,11 @@ class PagesController < ApplicationController
                 send_email_invite: false,
                 metafields: @metafield1
               }
-    cus = ShopifyAPI::Customer.new(customer)
-    p cus.valid?
+    cus = ShopifyAPI::Customer.create(customer)
     p cus
-    p cus.save
-    p cus.errors
+    p cus.id
     p meta = ShopifyAPI::Customer.find(cus.id).metafields
-    render json: {answer: cus, saved: cus.save, error: cus.errors.messages, metafields: meta }
+    render json: {answer: cus, error: cus.errors.messages, metafields: meta }
 
 
   end

@@ -105,14 +105,7 @@ class PagesController < ApplicationController
                     }
                 ],
                 send_email_invite: false,
-                metafields: [
-                     {
-                       key: "cip",
-                       value: cip,
-                       value_type: "string",
-                       namespace: "v2.0"
-                     }
-                   ]
+                metafields: @metafield1
               }
     cus = ShopifyAPI::Customer.new(customer)
     p cus.valid?
@@ -163,7 +156,7 @@ class PagesController < ApplicationController
             "country": "FR"
           }]
             )
-    customer.save
+    customer.save!
     customer.errors.messages
 
     render json: {answer: customer, saved: customer.save, error: customer.errors.messages, metafields: @metafields }

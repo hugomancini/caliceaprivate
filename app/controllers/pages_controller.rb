@@ -65,6 +65,7 @@ class PagesController < ApplicationController
     siret = params["siret"].to_i
     cip = params["cip"].to_i
     raison_sociale = params["raison_sociale"]
+    puts params
     puts customer_id
     puts cip
     puts siret

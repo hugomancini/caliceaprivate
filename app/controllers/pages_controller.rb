@@ -61,7 +61,18 @@ class PagesController < ApplicationController
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER
 
   def edit_pro
+    customer_id = params["customer_id"].to_i
+    siret = params["siret"].to_i
+    cip = params["cip"].to_i
+    raison_sociale = params["raison_sociale"]
+    puts customer_id
+    puts siret
+    puts cip
+    puts raison_sociale
     puts "I am in edit pro"
+
+    metafields = ShopifyAPI::Customer.find(customer_id).metafields
+    puts metafield
 
     render json: { answer: "inside ruby" }
   end
@@ -82,10 +93,6 @@ class PagesController < ApplicationController
     raison_sociale = params["raison_sociale"]
 
     puts "metafields -----------------------"
-    @metafield1 = ShopifyAPI::Metafield.create({cip: cip})
-    @metafield2 = ShopifyAPI::Metafield.create({siret: siret})
-    puts @metafield1
-    puts @metafield2
     puts cip
     puts tag
 

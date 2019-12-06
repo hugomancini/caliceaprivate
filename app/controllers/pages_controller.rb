@@ -61,9 +61,9 @@ class PagesController < ApplicationController
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER
 
   def edit_pro
-    customer_id = params["customer_id"].to_i
-    siret = params["siret"].to_i
-    cip = params["cip"].to_i
+    customer_id = params["customer_id"]
+    siret = params["siret"]
+    cip = params["cip"]
     raison_sociale = params["raison_sociale"]
     puts params
     puts "----------------------------------------MAKES NO SENSE"
@@ -82,9 +82,9 @@ class PagesController < ApplicationController
     puts metafields[2].key
     puts metafields[2].value
 
-    metafields[0].value = raison_sociale
+    metafields[0].value = siret
     metafields[1].value = cip
-    metafields[2].value = siret
+    metafields[2].value = raison_sociale
 
     puts metafields[0].key
     puts metafields[0].value
@@ -93,7 +93,7 @@ class PagesController < ApplicationController
     puts metafields[2].key
     puts metafields[2].value
 
-    render json: { answer: "inside ruby" }
+    render json: { metafields: metafields }
   end
 
   def create_pro_customer

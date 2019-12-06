@@ -72,9 +72,23 @@ class PagesController < ApplicationController
     puts "I am in edit pro"
 
     metafields = ShopifyAPI::Customer.find(customer_id).metafields
-    puts metafields[0]
-    puts metafields[1]
-    puts metafields[2]
+    puts metafields[0].key
+    puts metafields[0].value
+    puts metafields[1].key
+    puts metafields[1].value
+    puts metafields[2].key
+    puts metafields[2].value
+
+    metafields[0].value = raison_sociale
+    metafields[1].value = cip
+    metafields[2].value = siret
+
+    puts metafields[0].key
+    puts metafields[0].value
+    puts metafields[1].key
+    puts metafields[1].value
+    puts metafields[2].key
+    puts metafields[2].value
 
     render json: { answer: "inside ruby" }
   end

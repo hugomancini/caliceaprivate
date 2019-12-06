@@ -60,6 +60,12 @@ class PagesController < ApplicationController
   # UTILISER TOUJOURS CE CODE
   # OVERWRIDER L'AMOUNT DANS LE CREATE ORDER
 
+  def edit_pro
+    puts "I am in edit pro"
+
+    render: json { answer: "inside ruby" }
+  end
+
   def create_pro_customer
     puts "inside thomas createPro"
     puts Time.now

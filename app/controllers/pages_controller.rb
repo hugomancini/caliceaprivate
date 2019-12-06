@@ -135,11 +135,14 @@ class PagesController < ApplicationController
       p cus.save
       p cus.id
       p meta = ShopifyAPI::Customer.find(cus.id).metafields
+      render json: {answer: cus }
+
     else
       p cus.errors
+      render json: {errors: cus.errors.messages  }
+
     end
 
-    render json: {answer: cus, errors: cus.errors.messages}
 
 
   end

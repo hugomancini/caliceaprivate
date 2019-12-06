@@ -93,6 +93,13 @@ class PagesController < ApplicationController
     puts metafields[2].key
     puts metafields[2].value
 
+    metafields[0].save
+    metafields[1].save
+    metafields[2].save
+    p metafields.save
+
+    p metafields.errors
+
     render json: { metafields: metafields }
   end
 

@@ -66,13 +66,15 @@ class PagesController < ApplicationController
     cip = params["cip"].to_i
     raison_sociale = params["raison_sociale"]
     puts customer_id
-    puts siret
     puts cip
+    puts siret
     puts raison_sociale
     puts "I am in edit pro"
 
     metafields = ShopifyAPI::Customer.find(customer_id).metafields
-    puts metafield
+    puts metafields[0]
+    puts metafields[1]
+    puts metafields[2]
 
     render json: { answer: "inside ruby" }
   end

@@ -63,7 +63,7 @@ class PagesController < ApplicationController
   def edit_pro
     puts "I am in edit pro"
 
-    render: json { answer: "inside ruby" }
+    render json: { answer: "inside ruby" }
   end
 
   def create_pro_customer

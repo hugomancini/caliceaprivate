@@ -107,7 +107,9 @@ class PagesController < ApplicationController
     p cus
     p cus.tags
 
-    cus.tags = "'YOLO', 'PRO'"
+    cus.tags = "cip- #{metafields[1].value}, PRO"
+
+    p cus.save
 
 
 

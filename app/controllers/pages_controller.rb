@@ -103,14 +103,12 @@ class PagesController < ApplicationController
 
     puts "editing tag"
 
-    tags = ShopifyAPI::Customer.find(customer_id).tags
-    tags.split(",").each do |tag|
-      if tag.include? "cip"
-        tag = "cip- #{metafields[1].value}"
-        p tag.save
-      end
-      puts tag
-    end
+    cus = ShopifyAPI::Customer.find(customer_id)
+    p cus
+    p cus.tags
+
+    cus.tags = "'YOLO', 'PRO'"
+
 
 
     render json: { metafields: metafields }

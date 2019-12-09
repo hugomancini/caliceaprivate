@@ -101,6 +101,15 @@ class PagesController < ApplicationController
     p metafields[1].errors
     p metafields[2].errors
 
+    puts "editing tag"
+
+    tags = ShopifyAPI::Customer.find(customer_id).tags
+    tags.each do |tag|
+      if tag.include "cip"
+        tag = "cip- #{metafields[1].value}"
+      end
+      puts tag
+    end
 
 
     render json: { metafields: metafields }

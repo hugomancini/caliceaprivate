@@ -107,6 +107,7 @@ class PagesController < ApplicationController
     tags.split(",").each do |tag|
       if tag.include? "cip"
         tag = "cip- #{metafields[1].value}"
+        p tag.save
       end
       puts tag
     end

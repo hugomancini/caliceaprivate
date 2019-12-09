@@ -104,7 +104,7 @@ class PagesController < ApplicationController
     puts "editing tag"
 
     tags = ShopifyAPI::Customer.find(customer_id).tags
-    tags.each do |tag|
+    tags.split(",".each do |tag|
       if tag.include "cip"
         tag = "cip- #{metafields[1].value}"
       end
